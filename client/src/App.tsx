@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-import { GameCard } from './GameCard';
+import { GameCard } from './components/GameCard';
 
 interface Game {
   id: number;
   title: string;
   releaseOrder: number;
-  coverUrl?: string;
+  imageName?: string;
 }
 
 function App() {
@@ -30,6 +30,7 @@ function App() {
               key={game.id}
               title={game.title}
               partNumber={game.releaseOrder}
+              imageName={game.imageName}
             />
           ))}
         </div>
@@ -37,6 +38,5 @@ function App() {
     </div>
   );
 }
-
 
 export default App;
