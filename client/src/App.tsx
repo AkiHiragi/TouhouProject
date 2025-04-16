@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
+import { GameCard } from './GameCard';
 
 interface Game {
   id: number;
   title: string;
   releaseOrder: number;
-  coverImageUrl: string;
+  coverUrl?: string;
 }
 
 function App() {
@@ -13,27 +14,29 @@ function App() {
 
   useEffect(() => {
     fetch('/api/games')
-      .then((response => response.json()))
-      .then(data => setGames(data))
-      .catch(error => console.error('Error', error));
+      .then(response => response.json())
+      .then(data => setGames(data));
   }, [])
 
   return (
-    <div>
-      <h1>Touhou Games</h1>
-      {games.length == 0 ?
-        <p>Loading...</p> :
-        <ul>
+    <div className="app">
+      <h1>Touhou Project</h1>
+      {games.length === 0 ? (
+        <p>Загрузка...</p>
+      ) : (
+        <div className="game-list">
           {games.map(game => (
-            <li key={game.id}>
-              <h2>{game.title}</h2>
-              <p>Номер в серии: {game.releaseOrder}</p>
-            </li>
+            <GameCard
+              key={game.id}
+              title={game.title}
+              partNumber={game.releaseOrder}
+            />
           ))}
-        </ul>
-      }
+        </div>
+      )}
     </div>
   );
 }
+
 
 export default App;
