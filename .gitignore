@@ -24,7 +24,6 @@ build/
 /client/.env.local
 /client/build/
 /client/coverage/
-/client/package-lock.json
 
 ## БД и настройки ##
 appsettings.Development.json
