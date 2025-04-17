@@ -15,7 +15,10 @@ function App() {
   useEffect(() => {
     fetch('/api/games')
       .then(response => response.json())
-      .then(data => setGames(data));
+      .then(data => {
+        console.log(data);
+        setGames(data)
+      });
   }, [])
 
   return (

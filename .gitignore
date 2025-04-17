@@ -30,6 +30,9 @@ appsettings.Development.json
 *.sqlite
 *.sqlite3
 
+# Database
+*.db
+
 ## Системные файлы ##
 .DS_Store
 Thumbs.db

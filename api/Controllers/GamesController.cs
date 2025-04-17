@@ -1,15 +1,19 @@
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 [ApiController]
 [Route("/api/[controller]")]
 public class GamesController : ControllerBase {
-    private static readonly List<Game> Games = new() {
-        new Game{Id=1,Title="Touhou 6: Embodiment of Scarlet Devil", ReleaseOrder=6, ImageName="touhou_6.jpg"},
-        new Game{Id=2,Title="Touhou 7: Perfect Cherry Blossom", ReleaseOrder=7, ImageName="touhou_7.jpg"},
-    };
+    private readonly AppDbContext _db;
+
+    public GamesController(AppDbContext db) {
+        _db = db;
+    }
 
     [HttpGet]
-    public IActionResult GetAllGames() {
-        return Ok(Games);
+    public async Task<IActionResult> GetAllGames() {
+        return Ok(await _db.Games.Include(g => g.Characters)
+                                 .ToListAsync());
     }
 }
