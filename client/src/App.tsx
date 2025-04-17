@@ -16,7 +16,7 @@ function App() {
     fetch('/api/games')
       .then(response => response.json())
       .then(data => {
-        console.log(data);
+        // console.log(data);
         setGames(data)
       });
   }, [])
