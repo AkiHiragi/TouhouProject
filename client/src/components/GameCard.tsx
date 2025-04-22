@@ -1,3 +1,4 @@
+import { Badge, Button, Card } from 'react-bootstrap';
 import './GameCard.css'
 
 interface GameCardProps {
@@ -11,17 +12,22 @@ export function GameCard({ title, partNumber, imageName }: GameCardProps) {
         ? `/images/games/${imageName}`
         : `/images/placeholder.jpg`
     return (
-        <div className="card">
-            <img
-                src={imagePath}
-                alt={title}
-                className="game-cover"
-                onError={(e) => {
-                    (e.target as HTMLImageElement).src = '/images/placeholder.jpg'
-                }}
-            />
-            <h3>{title}</h3>
-            <p>Часть {partNumber} в серии</p>
-        </div>
+        <Card style={{ width: '18rem', margin: '10px' }}>
+            {imageName && (
+                <Card.Img
+                    variant='top'
+                    src={imagePath}
+                    alt={title}
+                    style={{ height: '350px', objectFit: 'cover' }}
+                />
+            )}
+            <Card.Body>
+                <Card.Title>{title}</Card.Title>
+                <Card.Text>
+                    <Badge bg='danger'>Часть {partNumber}</Badge>
+                </Card.Text>
+                <Button variant='primary'>Подробнее</Button>
+            </Card.Body>
+        </Card>
     )
 }
